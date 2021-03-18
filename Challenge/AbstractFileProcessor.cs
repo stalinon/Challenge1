@@ -7,12 +7,13 @@ namespace Challenge
     {
         protected abstract string FileFormat { get; }
 
-        protected abstract bool FileContentProcessing(string filename);
+        protected abstract bool FileContentProcessing(string filename); 
+        //возвращает true, если обработка проведена успешно
 
-        public bool ProcessFile(string fileName)
+        public void ProcessFile(string fileName)
         {
             if (File.Exists(fileName) && Path.GetExtension(fileName).Contains(FileFormat))
-                return FileContentProcessing(fileName);
+                FileContentProcessing(fileName);
             else
             {
                 try
@@ -24,7 +25,6 @@ namespace Challenge
                 {
                     Console.WriteLine(e.Message);
                 }
-                return false;
             }
         }
     }

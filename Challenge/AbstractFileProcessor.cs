@@ -10,10 +10,10 @@ namespace Challenge
         protected abstract bool FileContentProcessing(string filename); 
         //возвращает true, если обработка проведена успешно
 
-        public void ProcessFile(string fileName)
+        public bool ProcessFile(string fileName)
         {
             if (File.Exists(fileName) && Path.GetExtension(fileName).Contains(FileFormat))
-                FileContentProcessing(fileName);
+                return FileContentProcessing(fileName);
             else
             {
                 try
@@ -24,6 +24,7 @@ namespace Challenge
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                    return false;
                 }
             }
         }

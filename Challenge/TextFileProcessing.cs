@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Challenge
 {
@@ -9,19 +10,26 @@ namespace Challenge
             get { return ".txt"; }
         }
 
-        protected override bool FileContentProcessing(string fileName)
+        protected override void FileContentProcessing(string fileName)
         {
+            string text = "";
             try
             {
                 //обработка содержимого файла
-                Console.WriteLine($"Processing of {System.IO.Path.GetFileName(fileName)} started.");
+                Console.WriteLine($"Processing of {Path.GetFileName(fileName)} started.");
+                using (var reader = new StreamReader(fileName))
+                {
+                    text = reader.ReadToEnd() + " somestring";
+                }
+                using (StreamWriter writer = new StreamWriter(fileName))
+                {
+                    writer.WriteLine(text);
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return false;
             }
-            return true;
         }
     }
 }

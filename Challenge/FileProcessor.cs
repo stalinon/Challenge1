@@ -11,9 +11,9 @@ namespace Challenge
             this.fileProcessorExample = fileProcessorExample;
         }
 
-        public bool ProcessFile(string fileName)
+        public void ProcessFile(string fileName)
         {
-            return fileProcessorExample.ProcessFile(fileName);
+            fileProcessorExample.ProcessFile(fileName);
         }
 
     }
